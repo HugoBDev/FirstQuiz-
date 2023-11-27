@@ -36,43 +36,43 @@ const questionsArray = [
         'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/909JHryBRMXJeVswBUDlYWK7cQr.jpg'
     ),
 
-    //QUESTION 3
-    new Question(
-        'Quel almùklmùcteur joue dans clmùlùmklmùk film ?'
-        , [
-            'Morgan Freeman'
-            , 'Hugues Jackman'
-            , 'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
-    ),
+    // //QUESTION 3
+    // new Question(
+    //     'Quel almùklmùcteur joue dans clmùlùmklmùk film ?'
+    //     , [
+    //         'Morgan Freeman'
+    //         , 'Hugues Jackman'
+    //         , 'Matt Demon'
+    //     ],
+    //     2,
+    //     'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
+    // ),
 
 
-    //QUESTION 4
-    new Question(
-        'Quel acteur jklmùklmùklmùoue dans ce film ?'
-        , [
-            'Morgan Freeman'
-            , 'Hugues Jackman'
-            , 'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
-    ),
+    // //QUESTION 4
+    // new Question(
+    //     'Quel acteur jklmùklmùklmùoue dans ce film ?'
+    //     , [
+    //         'Morgan Freeman'
+    //         , 'Hugues Jackman'
+    //         , 'Matt Demon'
+    //     ],
+    //     2,
+    //     'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
+    // ),
 
-    //QUESTION 5
-    new Question(
-        'Quel acteur ne joue pas dans ce film de qualité ?',
-        [
-            'Gérard Jugnot'
-            , 'Thierry Lhermitte'
-            , 'Gérard Depardieu',
-            'Alain Chabat'
-        ],
-        2,
-        'https://fr.web.img5.acsta.net/pictures/23/06/21/12/06/4953335.jpg'
-    ),
+    // //QUESTION 5
+    // new Question(
+    //     'Quel acteur ne joue pas dans ce film de qualité ?',
+    //     [
+    //         'Gérard Jugnot'
+    //         , 'Thierry Lhermitte'
+    //         , 'Gérard Depardieu',
+    //         'Alain Chabat'
+    //     ],
+    //     2,
+    //     'https://fr.web.img5.acsta.net/pictures/23/06/21/12/06/4953335.jpg'
+    // ),
 ];
 
 
@@ -92,14 +92,12 @@ function createQuestionBlock(q, index) {
     const posterImg = document.createElement('img');
     posterImg.src = question.poster;
 
-
     const titleQuestion = document.createElement('p')
     // la je lui dis que ce que je veux à la place de mon texte c'est ce que j'ai dans mon objet Question
     titleQuestion.textContent = question.statement;
 
     const formAnswer = document.createElement('form');
     formAnswer.id = "question" + index
-
 
     //! la c'est le bordel, accroche toi à ton slip// 
     // On boucle dans mon tableau de liste d'acteur(answerList), à chaque fois que je bouvcle, je creer la partie radio+label+actor
@@ -108,20 +106,18 @@ function createQuestionBlock(q, index) {
         const answerWrapper = document.createElement('div');
         answerWrapper.classList.add('answer-wrapper');
         const label = document.createElement('label')
-        label.htmlFor = index + '' + i;
+        label.htmlFor = index;
         label.textContent = question.answerList[i]
-
 
         const input = document.createElement('input')
         input.type = "radio"
         input.name = "actor"
-        input.id = index + '' + i;
+        input.id = index;
 
         // la je range mon input et mon label dans mon answer-wrapper// 
         answerWrapper.appendChild(label)
         answerWrapper.appendChild(input)
         formAnswer.appendChild(answerWrapper)
-
     }
     // en gros on range les boites dans d'autres boites // 
     posterContainer.appendChild(posterImg)
@@ -131,8 +127,10 @@ function createQuestionBlock(q, index) {
     document.body.appendChild(divQuestion);
 }
 
-
-//  ici on execute l'ENORMEEEEE fonction au dessus pour chaque question de [questionArray]
+/**
+ * ici on execute l'ENORMEEEEE fonction au dessus pour chaque question de [questionArray]
+ * @param {Question[]} questionList 
+ */
 function generateQuestions(questionList) {
     questionList.forEach((ques, i) => {
         createQuestionBlock(ques, i)
@@ -140,4 +138,19 @@ function generateQuestions(questionList) {
 }
 
 
-generateQuestions(questionsArray)
+function getScore(questionIndex){
+    var formulaire = document.getElementById("question"+questionIndex);
+    let answer =  formulaire.elements[questionIndex];
+    console.log("answer", answer.value);
+    
+    let question = questionsArray[questionIndex];
+    const truly = question.correctAnswer;
+}
+
+function  getScores(){
+    questionsArray.forEach((question, index) => {
+        getScore(index);
+    })
+}
+
+generateQuestions(questionsArray);
