@@ -113,6 +113,7 @@ function createQuestionBlock(q, index) {
         input.type = "radio"
         input.name = "actor"
         input.id = index;
+        input.value = i
 
         // la je range mon input et mon label dans mon answer-wrapper// 
         answerWrapper.appendChild(label)
@@ -128,7 +129,9 @@ function createQuestionBlock(q, index) {
 }
 
 /**
- * ici on execute l'ENORMEEEEE fonction au dessus pour chaque question de [questionArray]
+ * Une fonction qui permet de générer les blocs de questioon 
+ * à affichier.
+ * 
  * @param {Question[]} questionList 
  */
 function generateQuestions(questionList) {
@@ -138,16 +141,32 @@ function generateQuestions(questionList) {
 }
 
 
-function getScore(questionIndex){
-    var formulaire = document.getElementById("question"+questionIndex);
-    let answer =  formulaire.elements[questionIndex];
-    console.log("answer", answer.value);
-    
-    let question = questionsArray[questionIndex];
-    const truly = question.correctAnswer;
+function getScore(questionIndex) {
+    var formulaire = document.getElementById("question" + questionIndex);
+    let answer = formulaire.querySelector('input[name="actor"]:checked');
+    if (answer) { // Si il y a une response de séléctionné.
+        let userAnswerIndex = parseInt(answer.value, 10); // Convertir la chaîne en nombre.
+        let correctAnswerIndex = questionsArray[questionIndex].correctAnswer;
+
+        if (userAnswerIndex === correctAnswerIndex) {
+            // Le code à executer si la reponse est correct.
+            console.log('Correct!');
+        } else {
+            // Le code à executer si la reponse n'est pas correct.
+            console.log('Incorrect!');
+        }
+    } else {
+        // Le code à executer si aucune reponse n'est séléctionné à l'index
+        // qui s'affiche dans la console.
+        console.log("No option selected for question " + questionIndex);
+    }
 }
 
-function  getScores(){
+
+/**
+ * 
+ */
+function getScores() {
     questionsArray.forEach((question, index) => {
         getScore(index);
     })
