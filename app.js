@@ -75,6 +75,7 @@ const questionsArray = [
     // ),
 ];
 
+let score = 0;
 
 function createQuestionBlock(q, index) {
 
@@ -151,6 +152,7 @@ function getScore(questionIndex) {
         if (userAnswerIndex === correctAnswerIndex) {
             // Le code à executer si la reponse est correct.
             console.log('Correct!');
+            score += 1;
         } else {
             // Le code à executer si la reponse n'est pas correct.
             console.log('Incorrect!');
@@ -160,16 +162,24 @@ function getScore(questionIndex) {
         // qui s'affiche dans la console.
         console.log("No option selected for question " + questionIndex);
     }
+
+    console.log(`le score est de ${score} sur ${questionsArray.length}`);
 }
 
 
 /**
  * 
  */
-function getScores() {
+function displayScores() {
     questionsArray.forEach((question, index) => {
         getScore(index);
     })
+
+
+    const scoreDiv = document.createElement('p');
+    scoreDiv.textContent = `${score} / ${questionsArray.length}`;
+    scoreDiv.classList.add('score')
+    document.body.appendChild(scoreDiv);
 }
 
 generateQuestions(questionsArray);
