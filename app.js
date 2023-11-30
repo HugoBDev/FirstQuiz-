@@ -1,15 +1,11 @@
 
-class Question {
-    constructor(statement, answerList, correctAnswer, poster) {
-        this.statement = statement;
-        this.answerList = answerList;
-        this.correctAnswer = correctAnswer;
-        this.poster = poster;
-    }
-}
+import config from './config.js';
+import Tmdb from './tmdb.js';
+import Question from './models/question.model.js';
+import Movie from './models/movie.model.js';
+const tmdb = new Tmdb;
 
 const questionsArray = [
-
     //QUESTION 1
     new Question(
         'Quel acteur joue dans ce film ?',
@@ -184,6 +180,46 @@ function displayScores() {
     document.body.appendChild(scoreDiv);
 }
 
+function generateQuestionsByMovie(movie){
+
+}
+
 
 // START 🚀
-generateQuestions(questionsArray);
+// generateQuestions(questionsArray);
+
+
+tmdb.discoverMovies(2).then(data => {
+    let i = 0;
+    let delay = setInterval(() => {
+        console.log(data.results[i]);
+
+        tmdb.getMovieCredits(data.results[i].id).then(credit => {
+            console.log(credit.cast);
+            let answerList = [
+                    credit.cast[0].name,
+                    credit.cast[1].name,
+                    credit.cast[2].name,
+                    credit.cast[3].name,
+            ]
+
+            const imgUrl = `https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}`; 
+            const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + data.results[i].title, answerList, 0,  imgUrl)
+
+            createQuestionBlock(question, i)
+        })
+
+
+
+        if (i === data.results.length - 1) {
+            clearInterval(delay);
+            console.log('stop');
+        }
+        i += 1;
+    }, 500)
+
+
+}).catch(e)(
+    console.error(e)
+);
+
