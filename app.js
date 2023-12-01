@@ -97,37 +97,29 @@ function createQuestionBlock(q, index) {
     // la je lui dis que ce que je veux à la place de mon texte c'est ce que j'ai dans mon objet Question
     titleQuestion.textContent = question.statement;
 
-    //! const formAnswer = document.createElement('form');
-    //! formAnswer.id = "question" + index
+    const questionsTest = document.createElement('div');
+    questionsTest.classList.add('questions-container');
 
 
     //! la c'est le bordel, accroche toi à ton slip// 
     // On boucle dans mon tableau de liste d'acteur(answerList), à chaque fois que je bouvcle, je creer la partie radio+label+actor
     for (let i = 0; i < question.answerList.length; i++) {
 //STOP HERE
-        const questionsTest = document.createElement('div');
-        questionsTest.classList.add('questions-container');
         const answerTest = document.createElement('answer-test')
-        answerTest.id = index + '' + i;
+        answerTest.classList.add('answer-test')
+        answerTest.id = 'index' + i;
         answerTest.textContent = question.answerList[i]
 
 
-        // const input = document.createElement('input')
-        // input.type = "radio"
-        // input.name = "actor"
-        // input.id = index + '' + i;
-
-        // la je range mon input et mon label dans mon answer-wrapper// 
         questionsTest.appendChild(answerTest)
-        // questionsTest.appendChild(input)
-        divQuestion.appendChild(questionsTest)
-        divQuestion.appendChild(answerTest)
-
+        
+        
     }
     // en gros on range les boites dans d'autres boites // 
     posterContainer.appendChild(posterImg)
     divQuestion.appendChild(posterContainer)
     divQuestion.appendChild(titleQuestion)
+    divQuestion.appendChild(questionsTest)
     document.body.appendChild(divQuestion);
 }
 
