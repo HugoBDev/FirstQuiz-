@@ -6,72 +6,6 @@ import Question from './models/question.model.js';
 import Movie from './models/movie.model.js';
 const tmdb = new Tmdb;
 
-const questionsArray = [
-    //QUESTION 1
-    new Question(
-        'Quel acteur joue dans ce film ?',
-        [
-            'Morgan Freeman',
-            'Hugues Jackman',
-            'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/pP1cyoXFc5Br1Sg21uORSN49yyu.jpg'
-    ),
-
-    //QUESTION 2
-    new Question(
-        'Qui est l\'acteur sur l\'affiche de ce film?'
-        , [
-            'Joaquin Phoenix'
-            , 'Adele Exarcpohupoulous'
-            , 'Joaquin Phoenix'
-            , 'Joaquin Phoenix'
-            , 'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/909JHryBRMXJeVswBUDlYWK7cQr.jpg'
-    ),
-
-    //QUESTION 3
-    new Question(
-        'Quel almùklmùcteur joue dans clmùlùmklmùk film ?'
-        , [
-            'Morgan Freeman'
-            , 'Hugues Jackman'
-            , 'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
-    ),
-
-
-    //QUESTION 4
-    new Question(
-        'Quel acteur jklmùklmùklmùoue dans ce film ?'
-        , [
-            'Morgan Freeman'
-            , 'Hugues Jackman'
-            , 'Matt Demon'
-        ],
-        2,
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/boAUuJBeID7VNp4L7LNMQs8mfQS.jpg'
-    ),
-
-    //QUESTION 5
-    new Question(
-        'Quel acteur ne joue pas dans ce film de qualité ?',
-        [
-            'Gérard Jugnot'
-            , 'Thierry Lhermitte'
-            , 'Gérard Depardieu',
-            'Alain Chabat'
-        ],
-        2,
-        'https://fr.web.img5.acsta.net/pictures/23/06/21/12/06/4953335.jpg'
-    ),
-];
-
 let score = 0;
 
 function createQuestionBlock(q, index) {
@@ -231,13 +165,3 @@ tmdb.discoverMovies(2).then(data => {
 
 
 
-//Ici au démarrage du site, la console log 'cest parti', quand elle est chargée etc // 
-
-// const TL = gsap.timeline();
-
-// TL
-// .to(".question-container",{x: '+=150', duration: 0.4})
-// .to(img2,{x: '+=150', duration: 0.4})
-// .to(img3,{x: '+=150', duration: 0.4})
-// .from(titre1,{opacity:0, duration: 0.4})
-// .from(titre2,{opacity:0, duration: 0.4})
