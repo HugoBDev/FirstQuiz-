@@ -7,6 +7,14 @@ body{
     background: #100a1d;
 }
 
+#questionsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 2rem;
+}
+
 .poster-container{
     position: relative;
     width: auto;
