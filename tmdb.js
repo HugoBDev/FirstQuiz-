@@ -27,7 +27,7 @@ export default class tmdb {
     //         console.error('Error fetching data:', error);
     //     });
     // }
-    
+
     /**
      * 
      * @param {*} page 
@@ -42,19 +42,19 @@ export default class tmdb {
             page: page,
             sort_by: 'popularity.desc'
         };
-        
+
         const options = {
             method: 'GET',
             ...commonHeader,
         }
-        
+
         const url = `${baseUrl}/discover/movie?${new URLSearchParams(queryParams).toString()}`
 
         return new Promise((resolve, reject) => {
             fetch(url, options)
-            .then(response => response.json())
-            .then(data => resolve(data))
-            .catch((error) => reject(error));
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch((error) => reject(error));
         })
     };
 
@@ -67,7 +67,7 @@ export default class tmdb {
      * @param {*} language 
      * @returns 
      */
-    getMovieCredits(movieId, language = 'fr'){
+    getMovieCredits(movieId, language = 'fr') {
         const queryParams = {
             language: language,
         };
@@ -81,9 +81,35 @@ export default class tmdb {
 
         return new Promise((resolve, reject) => {
             fetch(url, options)
-            .then(response => response.json())
-            .then(data => resolve(data))
-            .catch((error) => reject(error))
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch((error) => reject(error))
+        })
+    }
+
+    /**
+     * 
+     * @param {*} movieId 
+     * @param {*} language 
+     * @returns 
+     */
+    getMovieDetails(movieId, language = 'fr') {
+        const queryParams = {
+            language: language,
+        };
+
+        const options = {
+            method: 'GET',
+            ...commonHeader,
+        }
+
+        const url = `${baseUrl}/movie/${movieId}?${new URLSearchParams(queryParams).toString()}`
+
+        return new Promise((resolve, reject) => {
+            fetch(url, options)
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch((error) => reject(error))
         })
     }
 };
