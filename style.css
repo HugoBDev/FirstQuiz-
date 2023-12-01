@@ -99,25 +99,25 @@ input[type="radio"] {
 
 input[type="radio"] + span {
     padding: 12px 32px;
-    color: #0a7623;
+    color: #100a1d;
     border-radius : 500px;
     text-align: center;
     background: #fafffb;
     border: none;
     cursor: pointer;
     user-select: none;
-    filter: drop-shadow(0 2px 1px hsl(0, 0%, 60%));
+    filter: drop-shadow(0 2px 1px hsl(259, 49%, 8%));
     display: block;
   }
 
 input[type="radio"]:checked + span {
-    background: #044714;
+    background: #4a317e;
     color: #f1f1f1;
     transform: scale(1.1);
-    transition: all 1s ease;
+    transition: all 500ms ease;
     
   }
-input[type="radio"]:hover + span {
-    background: hsl(123, 30%, 50%);
-    color: hsl(123, 55%, 5%);
+input[type="radio"]:hover:not(:checked) + span {
+    background: hsl(259, 49%, 39%);
+    color: hsl(0, 0%, 80%);
   }
