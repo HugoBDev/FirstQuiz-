@@ -87,12 +87,9 @@ label{
     padding: 0;
 }
 input[type="radio"] {
-    /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
-    /* For iOS < 15 to remove gradient background */
     background-color: #fff;
-    /* Not removed via appearance */
     margin: 0;
   }
 
@@ -106,18 +103,19 @@ input[type="radio"] + span {
     border: none;
     cursor: pointer;
     user-select: none;
-    filter: drop-shadow(0 2px 1px hsl(259, 49%, 8%));
+    filter: drop-shadow(0 2px 1px rgba(17, 10, 30, 0.5));
     display: block;
   }
 
 input[type="radio"]:checked + span {
-    background: #4a317e;
-    color: #f1f1f1;
-    transform: scale(1.1);
-    transition: all 500ms ease;
+    background: hsl(259, 49%, 39%);
+    color: white;
+    transform: scale(1.05);
+    transition: transform 250ms ease-in-out;
     
   }
 input[type="radio"]:hover:not(:checked) + span {
-    background: hsl(259, 49%, 39%);
-    color: hsl(0, 0%, 80%);
+    transition: all 100ms ease-in-out;
+    background: hsl(259, 20%,90%);
+    filter: none;
   }
