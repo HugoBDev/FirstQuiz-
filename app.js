@@ -50,7 +50,6 @@ function displayScores() {
     document.body.appendChild(scoreDiv);
 }
 
-
 // START 🚀
 
 tmdb.discoverMovies(2).then(data => {
@@ -64,7 +63,7 @@ tmdb.discoverMovies(2).then(data => {
                 credit.cast[2].name,
                 credit.cast[3].name,
             ];
-            
+
             const imgUrl = `https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}`;
             const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + data.results[i].title + ' ?', answerList, 0, imgUrl);
             console.log(question);

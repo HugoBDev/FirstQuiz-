@@ -15,14 +15,11 @@ export default class Question {
 
     createQuestionBlock(index) {
 
-        // ca c'est la question que je met en parametre
 
-        // la je creer la div principale de ma question
-        const divQuestion = document.createElement('div');
-        // la je lui ajoute ses classes
-        divQuestion.classList.add('block', 'question');
+        const questionContainerRef = document.createElement('div');
+        const questionBlockTop = document.createElement('div');
+        questionBlockTop.classList.add('block', 'question');
 
-        // la je lui ajoute ses classes
         const posterContainer = document.createElement('div');
         posterContainer.classList.add('poster-container');
         const posterImg = document.createElement('img');
@@ -31,14 +28,13 @@ export default class Question {
         bottomGradient.classList.add('bottom-gradient');
 
         const titleQuestion = document.createElement('p');
-        // la je lui dis que ce que je veux à la place de mon texte c'est ce que j'ai dans mon objet Question
         titleQuestion.textContent = this.statement;
 
-        const questionsContainerRef = document.createElement('div');
-        questionsContainerRef.classList.add('questions-container');
+        const answersContainerRef = document.createElement('div');
+        answersContainerRef.classList.add('answers-container');
 
-        // la c'est le bordel, accroche toi à ton slip// 
-        // On boucle dans mon tableau de liste d'acteur(answerList), à chaque fois que je bouvcle, je creer la partie radio+label+actor
+
+        // Boucle sur chaque reponse de la qestion.
         for (let i = 0; i < this.answerList.length; i++) {
 
             const labelRef = document.createElement('label');
@@ -51,17 +47,24 @@ export default class Question {
 
             labelRef.appendChild(inputRef);
             labelRef.appendChild(spanRef);
-            questionsContainerRef.appendChild(labelRef)
+            answersContainerRef.appendChild(labelRef)
         }
-        // en gros on range les boites dans d'autres boites // 
+
+        const submitBtnRef = document.createElement('button');
+        submitBtnRef.classList.add('submit-question-btn');
+        submitBtnRef.id = 'submitBtn'+ index;
+        submitBtnRef.textContent = 'valider';
+
         posterContainer.appendChild(posterImg);
         posterContainer.appendChild(bottomGradient);
-        divQuestion.appendChild(posterContainer)
-        divQuestion.appendChild(titleQuestion)
-        divQuestion.appendChild(questionsContainerRef);
+        questionBlockTop.appendChild(posterContainer)
+        questionBlockTop.appendChild(titleQuestion)
+        questionBlockTop.appendChild(answersContainerRef);
 
-        document.getElementById('questionsWrapper').appendChild(divQuestion)
-        // document.body.appendChild(divQuestion);
+        questionContainerRef.appendChild(questionBlockTop);
+        questionContainerRef.appendChild(submitBtnRef);
+
+        document.getElementById('questionsWrapper').appendChild(questionContainerRef)
     }
 
 }
