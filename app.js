@@ -1,4 +1,5 @@
 
+
 class Question {
     constructor(statement, answerList, correctAnswer, poster) {
         this.statement = statement;
@@ -104,15 +105,24 @@ function createQuestionBlock(q, index) {
     //! la c'est le bordel, accroche toi à ton slip// 
     // On boucle dans mon tableau de liste d'acteur(answerList), à chaque fois que je bouvcle, je creer la partie radio+label+actor
     for (let i = 0; i < question.answerList.length; i++) {
-//STOP HERE
-        const answerTest = document.createElement('answer-test')
-        answerTest.classList.add('answer-test')
-        answerTest.id = 'index' + i;
-        answerTest.textContent = question.answerList[i]
+
+        const labelRef = document.createElement('label');
+        const inputRef = document.createElement('input');
+        inputRef.type = 'radio';
+        inputRef.name = 'answer'+ index;
 
 
-        questionsTest.appendChild(answerTest)
-        
+        const spanRef = document.createElement('span');
+        spanRef.textContent = question.answerList[i]; 
+
+        labelRef.appendChild(inputRef);
+        labelRef.appendChild(spanRef);
+
+
+
+
+        questionsTest.appendChild(labelRef)
+
         
     }
     // en gros on range les boites dans d'autres boites // 
@@ -121,7 +131,10 @@ function createQuestionBlock(q, index) {
     divQuestion.appendChild(titleQuestion)
     divQuestion.appendChild(questionsTest)
     document.body.appendChild(divQuestion);
+    
+   
 }
+
 
 
 //  ici on execute l'ENORMEEEEE fonction au dessus pour chaque question de [questionArray]
@@ -133,3 +146,15 @@ function generateQuestions(questionList) {
 
 
 generateQuestions(questionsArray)
+
+
+//Ici au démarrage du site, la console log 'cest parti', quand elle est chargée etc // 
+
+// const TL = gsap.timeline();
+
+// TL
+// .to(".question-container",{x: '+=150', duration: 0.4})
+// .to(img2,{x: '+=150', duration: 0.4})
+// .to(img3,{x: '+=150', duration: 0.4})
+// .from(titre1,{opacity:0, duration: 0.4})
+// .from(titre2,{opacity:0, duration: 0.4})
