@@ -1,0 +1,5 @@
+const config = {
+    bearer : 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZTExYzYyNGExMjYzODNmOTY0YmIxYmM2Yzc2ZjMwMiIsInN1YiI6IjY0OTFmN2IzYzJmZjNkMDBmZmJkNzQwZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aD853wFvqIyrdPLxHPDzTFEjgQ_X-Hz3gFE770lzUBE'
+}
+
+export default config;
