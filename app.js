@@ -92,7 +92,7 @@ function displayScores() {
 // START 🚀
 
 
-// Get polular Actors (for fake answsers 😈)
+// Get polulars Actors (for fake answsers 😈)
 let popularActors;
 tmdb.getPopularPeople().then(data => {
     popularActors = data.results;

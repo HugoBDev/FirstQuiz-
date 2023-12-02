@@ -31,6 +31,14 @@ export default class Question {
 
         const formRef = document.createElement('form');
         formRef.id = 'form' + index;
+        formRef.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la soumission par défaut du formulaire
+            console.log('Formulaire soumis !');
+        });
+
+        formRef.addEventListener('change', (event) => {
+            document.getElementById('submitBtn' + index).disabled = false
+        })
 
         const answersContainerRef = document.createElement('div');
         answersContainerRef.classList.add('answers-container');
@@ -43,6 +51,7 @@ export default class Question {
             const inputRef = document.createElement('input');
             inputRef.type = 'radio';
             inputRef.name = 'answer' + index;
+            inputRef.value = i;
 
             const spanRef = document.createElement('span');
             spanRef.textContent = this.answerList[i];
@@ -58,6 +67,9 @@ export default class Question {
         submitBtnRef.id = 'submitBtn'+ index;
         submitBtnRef.disabled = true;
         submitBtnRef.textContent = 'valider';
+        submitBtnRef.addEventListener('click', () => {
+            console.log('button ', index, 'was clicked !');
+        })
 
         posterContainerRef.appendChild(posterImgRef);
         posterContainerRef.appendChild(bottomGradientRef);

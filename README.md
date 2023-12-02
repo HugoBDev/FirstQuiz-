@@ -40,10 +40,9 @@ Le fichier de style CSS qui définit le style visuel de la page.
 - CSS3
 - GSAP (GreenSock Animation Platform)
 
-## Auteur
+## Auteurs
 
-@HugoBDev
-Support :
-@PGaillot
+- @HugoBDev
+- @PGaillot
 
 N'hésitez pas à ajouter d'autres sections ou informations en fonction des détails spécifiques de votre projet.
