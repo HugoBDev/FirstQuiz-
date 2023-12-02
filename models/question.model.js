@@ -15,18 +15,16 @@ export default class Question {
 
     createQuestionBlock(index) {
         const questionContainerRef = document.createElement('div');
+        questionContainerRef.classList.add('question-container')
 
-        const questionBlockTop = document.createElement('div');
-        questionBlockTop.classList.add('block', 'question');
+        const posterContainerRef = document.createElement('div');
+        posterContainerRef.classList.add('poster-container');
 
-        const posterContainer = document.createElement('div');
-        posterContainer.classList.add('poster-container');
+        const posterImgRef = document.createElement('img');
+        posterImgRef.src = this.poster;
 
-        const posterImg = document.createElement('img');
-        posterImg.src = this.poster;
-
-        const bottomGradient = document.createElement('div');
-        bottomGradient.classList.add('bottom-gradient');
+        const bottomGradientRef = document.createElement('div');
+        bottomGradientRef.classList.add('bottom-gradient');
         
         const titleQuestion = document.createElement('p');
         titleQuestion.textContent = this.statement;
@@ -55,21 +53,21 @@ export default class Question {
         }
 
         const submitBtnRef = document.createElement('button');
+        submitBtnRef.type = 'submit';
         submitBtnRef.classList.add('submit-question-btn');
         submitBtnRef.id = 'submitBtn'+ index;
         submitBtnRef.disabled = true;
         submitBtnRef.textContent = 'valider';
 
-        posterContainer.appendChild(posterImg);
-        posterContainer.appendChild(bottomGradient);
-        questionBlockTop.appendChild(posterContainer)
-        questionBlockTop.appendChild(titleQuestion)
+        posterContainerRef.appendChild(posterImgRef);
+        posterContainerRef.appendChild(bottomGradientRef);
 
-        formRef.appendChild(answersContainerRef)
-        questionBlockTop.appendChild(formRef)
+        formRef.appendChild(answersContainerRef);
+        formRef.appendChild(submitBtnRef);
 
-        questionContainerRef.appendChild(questionBlockTop);
-        questionContainerRef.appendChild(submitBtnRef);
+        questionContainerRef.appendChild(posterContainerRef);
+        questionContainerRef.appendChild(titleQuestion);
+        questionContainerRef.appendChild(formRef);
 
         document.getElementById('questionsWrapper').appendChild(questionContainerRef)
     }
