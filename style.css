@@ -139,7 +139,7 @@ input[type='radio']:checked + span {
   background: hsl(259, 49%, 39%);
   color: white;
   transform: scale(1.05);
-  transition: transform 250ms ease-in-out;
+  transition: transform 150ms ease-in-out;
 }
 input[type='radio']:hover:not(:checked) + span {
   transition: all 100ms ease-in-out;

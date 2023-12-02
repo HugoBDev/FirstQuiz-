@@ -112,4 +112,33 @@ export default class tmdb {
                 .catch((error) => reject(error))
         })
     }
+
+    /**
+     * Cette fonction à pour but de retourner une liste de personnes populaires (globalement des acteurs).
+     * 
+     * @param {*} page 
+     * @param {*} language 
+     * @returns 
+     */
+    getPopularPeople(page = 1, language = 'fr'){
+        const queryParams = {
+            language: language,
+            page: page,
+        };
+
+        const options = {
+            method: 'GET',
+            ...commonHeader,
+        }
+
+        const url = `${baseUrl}/person/popular?${new URLSearchParams(queryParams).toString()}`
+
+        return new Promise((resolve, reject) => {
+            fetch(url, options)
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch((error) => reject(error))
+        })
+    }
+
 };

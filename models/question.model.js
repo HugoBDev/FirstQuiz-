@@ -14,21 +14,25 @@ export default class Question {
 
 
     createQuestionBlock(index) {
-
-
         const questionContainerRef = document.createElement('div');
+
         const questionBlockTop = document.createElement('div');
         questionBlockTop.classList.add('block', 'question');
 
         const posterContainer = document.createElement('div');
         posterContainer.classList.add('poster-container');
+
         const posterImg = document.createElement('img');
         posterImg.src = this.poster;
+
         const bottomGradient = document.createElement('div');
         bottomGradient.classList.add('bottom-gradient');
-
+        
         const titleQuestion = document.createElement('p');
         titleQuestion.textContent = this.statement;
+
+        const formRef = document.createElement('form');
+        formRef.id = 'form' + index;
 
         const answersContainerRef = document.createElement('div');
         answersContainerRef.classList.add('answers-container');
@@ -60,7 +64,9 @@ export default class Question {
         posterContainer.appendChild(bottomGradient);
         questionBlockTop.appendChild(posterContainer)
         questionBlockTop.appendChild(titleQuestion)
-        questionBlockTop.appendChild(answersContainerRef);
+
+        formRef.appendChild(answersContainerRef)
+        questionBlockTop.appendChild(formRef)
 
         questionContainerRef.appendChild(questionBlockTop);
         questionContainerRef.appendChild(submitBtnRef);
