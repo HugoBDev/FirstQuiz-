@@ -68,10 +68,16 @@ tmdb.discoverMovies(2).then(data => {
             i++;
         })
 
+        tmdb.getMovieDetails(data.results[i].id).then(data=> {
+            console.log(data);
+            }).catch((error) => console.error(error));
 
         if (i === questionsCount -1 ) {
             clearInterval(delay);
+            
         }
     }, 500)
-
+    
+    console.log(data);
 }).catch(error => console.error(error));
+
