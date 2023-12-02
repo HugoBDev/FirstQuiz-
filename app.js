@@ -2,7 +2,6 @@
 
 import Tmdb from './tmdb.js';
 import Question from './models/question.model.js';
-import Movie from './models/movie.model.js';
 const tmdb = new Tmdb;
 
 let score = 0;
@@ -37,6 +36,32 @@ function getScore(questionIndex) {
 
 
 /**
+ * 
+ * @param {*} movie 
+ * @returns 
+ */
+function generateQuestionByMovie(movie) {
+    return new Promise((resolve, reject) => {
+        tmdb.getMovieCredits(movie.id)
+            .then(credit => {
+
+                const answerList = [
+                    credit.cast[0].name,
+                    credit.cast[1].name,
+                    credit.cast[2].name,
+                    credit.cast[3].name,
+                ];
+
+                const imgUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + movie.title + ' ?', answerList, 0, imgUrl)
+                resolve(question)
+
+            }).catch(error => reject(error));
+    });
+}
+
+
+/**
  * La fonction qui affiche le score final
  */
 function displayScores() {
@@ -52,26 +77,23 @@ function displayScores() {
 
 // START 🚀
 
+
+// Get polular Actors (for fake answsers 😈)
+let popularActors;
+tmdb.getPopularPeople().then(data => {
+    popularActors = data.results;
+    console.log(popularActors);
+}).catch((error) => console.error(error));
+
+
 tmdb.discoverMovies(2).then(data => {
     let i = 0;
     let delay = setInterval(() => {
 
-        tmdb.getMovieCredits(data.results[i].id).then(credit => {
-            const answerList = [
-                credit.cast[0].name,
-                credit.cast[1].name,
-                credit.cast[2].name,
-                credit.cast[3].name,
-            ];
-
-            const imgUrl = `https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}`;
-            const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + data.results[i].title + ' ?', answerList, 0, imgUrl);
-            console.log(question);
-            question.createQuestionBlock(i);
-            i += 1;
-
-        }).catch(error => console.error(error))
-
+        generateQuestionByMovie(data.results[i]).then(q => {
+            q.createQuestionBlock(i)
+            i++;
+        })
 
 
         // if (i === data.results.length - 1) {
@@ -81,6 +103,3 @@ tmdb.discoverMovies(2).then(data => {
     }, 500)
 
 }).catch(error => console.error(error));
-
-
-
