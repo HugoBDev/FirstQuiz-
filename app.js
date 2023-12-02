@@ -90,11 +90,17 @@ tmdb.discoverMovies(2).then(data => {
             i++;
         })
 
+        tmdb.getMovieDetails(data.results[i].id).then(data=> {
+            console.log(data);
+            }).catch((error) => console.error(error));
 
         // if (i === data.results.length - 1) {
         if (i === 2) {
             clearInterval(delay);
+            
         }
     }, 500)
-
+    
+    console.log(data);
 }).catch(error => console.error(error));
+
