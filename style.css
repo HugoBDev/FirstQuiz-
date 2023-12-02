@@ -13,7 +13,6 @@ body {
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
-  box-shadow: 0 0 1rem 0.25rem #302350;
 }
 
 .poster-container {
@@ -48,6 +47,7 @@ body {
 }
 
 .question-container {
+  box-shadow: 0 0 1rem 0.25rem #453472;
   display: flex;
   flex-direction: column;
   align-items: center;
