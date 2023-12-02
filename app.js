@@ -45,11 +45,8 @@ function generateQuestionByMovie(movie) {
         tmdb.getMovieCredits(movie.id)
             .then(credit => {
 
-
                 const maxAnswers = 4;
                 const correctAnswer = Math.floor(Math.random() * maxAnswers);
-                console.log(correctAnswer);
-
                 const imgUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
                 const answerList = [];
                 answerList[correctAnswer] = getRandomActorName(popularActors);
@@ -58,8 +55,8 @@ function generateQuestionByMovie(movie) {
                     if(i != correctAnswer) answerList[i] = credit.cast[i].name;
                 }
 
-                const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + movie.title + ' ?', answerList, 0, imgUrl)
-                resolve(question)
+                const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + movie.title + ' ?', answerList, correctAnswer, imgUrl);
+                resolve(question);
 
             }).catch(error => reject(error));
     });
@@ -74,21 +71,6 @@ function getRandomActorName(actors){
     return popularActors[Math.floor(Math.random() * actors.length )].name;
 }
 
-
-/**
- * La fonction qui affiche le score final
- */
-function displayScores() {
-    questionsArray.forEach((question, index) => {
-        getScore(index);
-    })
-
-    const scoreDiv = document.createElement('p');
-    scoreDiv.textContent = `${score} / ${questionsArray.length}`;
-    scoreDiv.classList.add('score')
-    document.body.appendChild(scoreDiv);
-}
-
 // START 🚀
 
 
@@ -96,7 +78,6 @@ function displayScores() {
 let popularActors;
 tmdb.getPopularPeople().then(data => {
     popularActors = data.results;
-    console.log(popularActors);
 }).catch((error) => console.error(error));
 
 

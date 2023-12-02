@@ -14,20 +14,6 @@ const commonHeader = {
 
 export default class tmdb {
 
-
-    // authenticate() {
-    //     const url = `${baseUrl}/authentication`
-
-    //     fetch(url, getOptions)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //     });
-    // }
-
     /**
      * 
      * @param {*} page 
