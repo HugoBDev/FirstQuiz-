@@ -55,19 +55,20 @@ export default class Question {
                     // si la valeur du radio checked est égale à la valeur de la correctAnswer ...
                     if (radio.value === cAnswer.toString()) { // ✅
                         // Le Code à executer si la response est correct
-                        console.log('correct !');
-                        radioSpan.classList.add('correct-answer')
+                        radioSpan.classList.add('correct-answer');
+                        this.score ++;
 
-                    
                     } else { // ❌ Sinon ...
                         // Le Code à executer si la response n'est pas correct ...
-                        console.log('mauvaise reponse !');
                         radioSpan.classList.add('wrong-answer')
-                        // change le style de l'input selectionné par l'utilisateur (pour du rouge par ce que ce n'est pas la bonne reponse.)
-                        //TODO
-
-                        // affiche en vert la bonne reponse que l'utilisateur à raté
-                        //TODO
+                        const formRef = radioParent.parentElement;
+                        const labels = formRef.querySelectorAll('label');
+                        labels.forEach((label, index) => {
+                            if(cAnswer === index){
+                                // label.classList.add('correct-answer')
+                                label.querySelector('span').classList.add('correct-answer');
+                            }
+                        }) 
                     }
 
 

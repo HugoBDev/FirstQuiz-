@@ -3,37 +3,9 @@
 import Tmdb from './tmdb.js';
 import Question from './models/question.model.js';
 const tmdb = new Tmdb;
+const questionsCount = 6;
 
 let score = 0;
-
-/**
- * 
- * @param {*} questionIndex 
- */
-function getScore(questionIndex) {
-    var formulaire = document.getElementById("question" + questionIndex);
-    let answer = formulaire.querySelector('input[name="actor"]:checked');
-    if (answer) { // Si il y a une response de séléctionné.
-        let userAnswerIndex = parseInt(answer.value, 10); // Convertir la chaîne en nombre.
-        let correctAnswerIndex = questionsArray[questionIndex].correctAnswer;
-
-        if (userAnswerIndex === correctAnswerIndex) {
-            // Le code à executer si la reponse est correct.
-            console.log('Correct!');
-            score += 1;
-        } else {
-            // Le code à executer si la reponse n'est pas correct.
-            console.log('Incorrect!');
-        }
-    } else {
-        // Le code à executer si aucune reponse n'est séléctionné à l'index
-        // qui s'affiche dans la console.
-        console.log("No option selected for question " + questionIndex);
-    }
-
-    console.log(`le score est de ${score} sur ${questionsArray.length}`);
-}
-
 
 /**
  * 
@@ -80,19 +52,24 @@ tmdb.getPopularPeople().then(data => {
     popularActors = data.results;
 }).catch((error) => console.error(error));
 
+for (let i = 0; i < questionsCount; i++) {
+    const skeleton =  document.createElement('div');
+    skeleton.classList.add('skeleton', 'sk'+i);
+    document.getElementById('questionsWrapper').appendChild(skeleton);
+}
 
 tmdb.discoverMovies(2).then(data => {
     let i = 0;
     let delay = setInterval(() => {
 
         generateQuestionByMovie(data.results[i]).then(q => {
-            q.createQuestionBlock(i)
+            q.createQuestionBlock(i);
+            document.querySelector('.sk'+i).remove();
             i++;
         })
 
 
-        // if (i === data.results.length - 1) {
-        if (i === 2) {
+        if (i === questionsCount -1 ) {
             clearInterval(delay);
         }
     }, 500)

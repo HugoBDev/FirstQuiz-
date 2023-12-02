@@ -15,6 +15,16 @@ body {
   padding: 2rem;
 }
 
+.skeleton {
+  background: linear-gradient(150deg, grey, rgb(177, 177, 177));
+  mix-blend-mode: color-dodge;
+  border-radius: 1rem;
+  height: 100%;
+  width: 24rem;
+  min-height: 48rem;
+  height: auto;
+}
+
 .poster-container {
   position: relative;
   width: auto;
@@ -56,12 +66,13 @@ body {
   border-radius: 1rem;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .question-container > form {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   align-items: center;
   background: white;
   justify-content: center;
@@ -80,22 +91,16 @@ body {
   font-weight: 600;
 }
 
-.submit-btn {
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  user-select: none;
-  background: white;
-}
 
 .answers-container {
   width: auto;
   padding: 1rem;
   gap: 22px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
   justify-content: center;
+  align-items: center;
 }
 
 .submit-question-btn {
@@ -103,6 +108,7 @@ body {
   border: none;
   z-index: 2;
   text-transform: capitalize;
+  margin-top: 1rem ;
   font-size: 2rem;
   background: #302350;
   font-family: Arial, Helvetica, sans-serif;
@@ -112,7 +118,6 @@ body {
   padding: 1rem;
   cursor: pointer;
 }
-
 
 button:disabled {
   background: #9b9b9b;
@@ -149,7 +154,7 @@ input[type='radio']:checked + span {
   transform: scale(1.05);
   transition: transform 150ms ease-in-out;
 }
-input[type='radio']:hover:not(:checked) + span {
+input[type='radio']:hover:not(:checked, :disabled) + span {
   transition: all 100ms ease-in-out;
   background: hsl(259, 20%, 90%);
   filter: none;
@@ -161,11 +166,10 @@ input[type='radio']:disabled + span {
   filter: none;
 }
 
-input[type='radio']:disabled + .wrong-answer{
+input[type='radio']:disabled + .wrong-answer {
   background: rgb(199, 127, 127);
 }
 
-
-input[type='radio']:disabled + .correct-answer{
+input[type='radio']:disabled + .correct-answer {
   background: rgb(135, 199, 127);
 }
