@@ -45,19 +45,33 @@ function generateQuestionByMovie(movie) {
         tmdb.getMovieCredits(movie.id)
             .then(credit => {
 
-                const answerList = [
-                    credit.cast[0].name,
-                    credit.cast[1].name,
-                    credit.cast[2].name,
-                    credit.cast[3].name,
-                ];
+
+                const maxAnswers = 4;
+                const correctAnswer = Math.floor(Math.random() * maxAnswers);
+                console.log(correctAnswer);
 
                 const imgUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                const answerList = [];
+                answerList[correctAnswer] = getRandomActorName(popularActors);
+
+                for (let i = 0; i < maxAnswers; i++) {
+                    if(i != correctAnswer) answerList[i] = credit.cast[i].name;
+                }
+
                 const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + movie.title + ' ?', answerList, 0, imgUrl)
                 resolve(question)
 
             }).catch(error => reject(error));
     });
+}
+
+/**
+ * 
+ * @param {*} actors 
+ * @returns 
+ */
+function getRandomActorName(actors){
+    return popularActors[Math.floor(Math.random() * actors.length )].name;
 }
 
 
