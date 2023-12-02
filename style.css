@@ -113,6 +113,7 @@ body {
   cursor: pointer;
 }
 
+
 button:disabled {
   background: #9b9b9b;
 }
@@ -152,4 +153,19 @@ input[type='radio']:hover:not(:checked) + span {
   transition: all 100ms ease-in-out;
   background: hsl(259, 20%, 90%);
   filter: none;
+}
+
+input[type='radio']:disabled + span {
+  transition: all 100ms ease-in-out;
+  background: hsl(263, 8%, 81%);
+  filter: none;
+}
+
+input[type='radio']:disabled + .wrong-answer{
+  background: rgb(199, 127, 127);
+}
+
+
+input[type='radio']:disabled + .correct-answer{
+  background: rgb(135, 199, 127);
 }

@@ -49,15 +49,37 @@ export default class Question {
             radios.forEach(radio => {
                 //On bouche sur chaque input radio ... 
                 if (radio.checked) { // mais on ne teste que celui qui est checked !
+                    const radioParent = radio.parentElement;
+                    const radioSpan = radioParent.querySelector('span');
 
                     // si la valeur du radio checked est égale à la valeur de la correctAnswer ...
-                    if (radio.value === cAnswer.toString()) {
+                    if (radio.value === cAnswer.toString()) { // ✅
                         // Le Code à executer si la response est correct
                         console.log('correct !');
-                    } else { // Sinon ...
+                        radioSpan.classList.add('correct-answer')
+
+                    
+                    } else { // ❌ Sinon ...
                         // Le Code à executer si la response n'est pas correct ...
                         console.log('mauvaise reponse !');
+                        radioSpan.classList.add('wrong-answer')
+                        // change le style de l'input selectionné par l'utilisateur (pour du rouge par ce que ce n'est pas la bonne reponse.)
+                        //TODO
+
+                        // affiche en vert la bonne reponse que l'utilisateur à raté
+                        //TODO
                     }
+
+
+                    // 👇 Ces actions sont commune au deux options (si l'utilisateur repond correctement ✅ ou pas ❌)
+    
+                    // retire submit btn de l'écran
+                    document.getElementById('submitBtn' + index).style.display = 'none'
+
+                    // desactive les radios des la question.
+                    radios.forEach(radio => {
+                        radio.disabled = true;
+                    })
                 }
             })
         });
