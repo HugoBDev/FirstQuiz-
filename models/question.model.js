@@ -53,6 +53,7 @@ export default class Question {
         const submitBtnRef = document.createElement('button');
         submitBtnRef.classList.add('submit-question-btn');
         submitBtnRef.id = 'submitBtn'+ index;
+        submitBtnRef.disabled = true;
         submitBtnRef.textContent = 'valider';
 
         posterContainer.appendChild(posterImg);
