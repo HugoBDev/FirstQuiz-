@@ -2,10 +2,19 @@
 
 import Tmdb from './tmdb.js';
 import Question from './models/question.model.js';
-const tmdb = new Tmdb;
-const questionsCount = 6;
 
+// *------------------  |  Variables & Constantes  | ------------------------------
+
+const counterMenuRef = document.getElementById('scoreCounter');
+const counterMenuHeaderRef = counterMenuRef.querySelector('.counter-header');
+const counterMenuHeaderToogleBtnRef = counterMenuHeaderRef.querySelector('.toggle-btn');
+const scoreCounterMenueHeaderRef = counterMenuHeaderRef.querySelector('.score');
+
+const tmdb = new Tmdb;
+const questionsCount = 3;
 let score = 0;
+
+// *----------------- |        Functions        | --------------------------------
 
 /**
  * 
@@ -24,7 +33,7 @@ function generateQuestionByMovie(movie) {
                 answerList[correctAnswer] = getRandomActorName(popularActors);
 
                 for (let i = 0; i < maxAnswers; i++) {
-                    if(i != correctAnswer) answerList[i] = credit.cast[i].name;
+                    if (i != correctAnswer) answerList[i] = credit.cast[i].name;
                 }
 
                 const question = new Question('Lequel de ces acteurs n \'as pas joué dans ' + movie.title + ' ?', answerList, correctAnswer, imgUrl);
@@ -39,12 +48,34 @@ function generateQuestionByMovie(movie) {
  * @param {*} actors 
  * @returns 
  */
-function getRandomActorName(actors){
-    return popularActors[Math.floor(Math.random() * actors.length )].name;
+function getRandomActorName(actors) {
+    return popularActors[Math.floor(Math.random() * actors.length)].name;
 }
 
-// START 🚀
+function updateCounterScore(){
+    scoreCounterMenueHeaderRef.textContent = `${score}/${questionsCount}`
+}
 
+
+function initCounterMenu() {
+    scoreCounterMenueHeaderRef.textContent = `${score}/${questionsCount}`
+    counterMenuHeaderToogleBtnRef.addEventListener('click', (event) => {
+        if (counterMenuRef.style.bottom === '0px') {
+            counterMenuRef.style.bottom = '-8rem';
+        } else {
+            counterMenuRef.style.bottom = '0';
+        }
+    })
+}
+
+// *----------------- |       APP START 🚀🚀🚀       | --------------------------------
+
+initCounterMenu()
+
+window.addEventListener('sendScore' ,(event) => {
+    score += event.detail.score;
+    updateCounterScore()
+})
 
 // Get polulars Actors (for fake answsers 😈)
 let popularActors;
@@ -53,8 +84,8 @@ tmdb.getPopularPeople().then(data => {
 }).catch((error) => console.error(error));
 
 for (let i = 0; i < questionsCount; i++) {
-    const skeleton =  document.createElement('div');
-    skeleton.classList.add('skeleton', 'sk'+i);
+    const skeleton = document.createElement('div');
+    skeleton.classList.add('skeleton', 'sk' + i);
     document.getElementById('questionsWrapper').appendChild(skeleton);
 }
 
@@ -64,20 +95,20 @@ tmdb.discoverMovies(2).then(data => {
 
         generateQuestionByMovie(data.results[i]).then(q => {
             q.createQuestionBlock(i);
-            document.querySelector('.sk'+i).remove();
+            document.querySelector('.sk' + i).remove();
             i++;
         })
 
-        tmdb.getMovieDetails(data.results[i].id).then(data=> {
-            console.log(data);
-            }).catch((error) => console.error(error));
+        // tmdb.getMovieDetails(data.results[i].id).then(data => {
+        //     console.log(data);
+        // }).catch((error) => console.error(error));
 
-        if (i === questionsCount -1 ) {
+        if (i === questionsCount - 1) {
             clearInterval(delay);
-            
+
         }
     }, 500)
-    
+
     console.log(data);
 }).catch(error => console.error(error));
 

@@ -15,6 +15,8 @@ export default class Question {
 
     createQuestionBlock(index) {
 
+        let score = 0;
+
         const cAnswer = this.correctAnswer;
 
         const questionContainerRef = document.createElement('div');
@@ -43,8 +45,7 @@ export default class Question {
 
             event.preventDefault(); // Empêche la soumission par défaut du formulaire
 
-            const form = document.getElementById('form' + index);
-            const radios = form.querySelectorAll('input[type="radio"]');
+            const radios = formRef.querySelectorAll('input[type="radio"]');
 
             radios.forEach(radio => {
                 //On bouche sur chaque input radio ... 
@@ -56,7 +57,8 @@ export default class Question {
                     if (radio.value === cAnswer.toString()) { // ✅
                         // Le Code à executer si la response est correct
                         radioSpan.classList.add('correct-answer');
-                        this.score ++;
+                        questionContainerRef.classList.add('correct-block');
+                        score ++;
 
                     } else { // ❌ Sinon ...
                         // Le Code à executer si la response n'est pas correct ...
@@ -69,18 +71,30 @@ export default class Question {
                                 label.querySelector('span').classList.add('correct-answer');
                             }
                         }) 
+                        questionContainerRef.classList.add('wrong-block');
                     }
 
 
-                    // 👇 Ces actions sont commune au deux options (si l'utilisateur repond correctement ✅ ou pas ❌)
+                    // 👇 Ces actions sont commune au deux options 
+                    // (si l'utilisateur repond correctement ✅ ou pas ❌)
     
                     // retire submit btn de l'écran
                     document.getElementById('submitBtn' + index).style.display = 'none'
+                    questionContainerRef.style.paddingBottom = '2.5rem';
 
                     // desactive les radios des la question.
                     radios.forEach(radio => {
                         radio.disabled = true;
                     })
+
+
+                    // pour creer un event et pourvoir le charger depuis app.js
+                    const sendScoreEvent = new CustomEvent('sendScore', {
+                        detail: {
+                            score: score
+                        }
+                    });
+                    window.dispatchEvent(sendScoreEvent);
                 }
             })
         });
@@ -92,7 +106,8 @@ export default class Question {
              * donc on peux autoriser l'utilisateur a cliquer sur valider,
              * ca se traduit par changer l'état disabled du bouton de true a false
             */
-            document.getElementById('submitBtn' + index).disabled = false
+            document.getElementById('submitBtn' + index).disabled = false;
+            document.getElementById('scoreCounter').style.bottom = '0'
         })
 
         const answersContainerRef = document.createElement('div');
